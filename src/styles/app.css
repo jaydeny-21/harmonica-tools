@@ -1,0 +1,89 @@
+@import './tokens.css';
+
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);
+  font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  line-height:1.5;-webkit-font-smoothing:antialiased}
+
+.wrap{max-width:1600px;margin:0 auto;padding-inline:24px;padding-block:28px 40px}
+.eyebrow{color:var(--accent);font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;margin-bottom:6px}
+h1{font-size:34px;margin:0 0 8px}
+.lede{color:var(--muted);max-width:62ch;font-size:14.5px;margin:0}
+
+.panel{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px;margin-top:16px}
+
+.ctl-grid{display:grid;grid-template-columns:repeat(6,auto);gap:18px;align-items:end}
+.field .label{display:block;color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:6px}
+.seg{display:inline-flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden}
+.seg button{background:transparent;color:var(--ink);border:0;padding:7px 12px;font-size:13px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--panel-2);color:var(--accent);font-weight:600}
+.seg button[hidden]{display:none}
+
+.keys{display:flex;gap:10px;align-items:end}
+.sublabel{color:var(--muted);font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+select,.harp-static{background:var(--panel-2);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;min-width:72px}
+.arrow{color:var(--muted);align-self:center;padding:0 2px}
+.stepper{display:inline-flex;gap:6px}
+.stepper button{background:var(--panel-2);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px 10px;font-size:13px;cursor:pointer}
+.file-btn{display:inline-block;background:var(--panel-2);color:var(--ink);border:1px solid var(--border);border-radius:8px;padding:7px 12px;font-size:13px;cursor:pointer}
+.readout{margin-left:auto;text-align:right}
+.big{display:block;font-size:28px;font-weight:700;color:var(--accent)}
+.sub{color:var(--muted);font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+.link-btn{background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;font-size:12px;padding:0}
+
+.io{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media (max-width:900px){.io{grid-template-columns:1fr}}
+.io-panel{display:flex;flex-direction:column;padding:0}
+.io-head{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--border)}
+.head-left{display:flex;gap:10px;align-items:center}
+.t{font-weight:600;font-size:13px}
+.mode-select{min-width:0;padding:4px 8px;font-size:12px}
+.copy{background:var(--panel-2);color:var(--ink);border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:11px;letter-spacing:.08em;font-weight:600;cursor:pointer}
+.copy[aria-pressed="true"]{background:var(--accent);color:#111;border-color:var(--accent)}
+.zoom-badge{font-size:11px;color:var(--muted);font-variant-numeric:tabular-nums;min-width:34px;text-align:right}
+.zoom-hint{display:inline-flex;align-items:center;justify-content:center;width:16px;height:16px;border-radius:50%;
+  border:1px solid var(--border);color:var(--muted);font-size:10px;font-style:italic;font-weight:700;
+  font-family:"JetBrains Mono",ui-monospace,monospace;cursor:help;user-select:none;outline:0}
+.zoom-hint:hover,.zoom-hint:focus-visible{color:var(--accent);border-color:var(--accent)}
+
+.info-hint-wrap{position:relative;display:inline-flex}
+.hint-pop{position:absolute;top:calc(100% + 8px);z-index:20;width:300px;max-width:78vw;
+  background:var(--panel-2);border:1px solid var(--border);border-radius:10px;padding:12px 14px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);color:var(--ink);font-size:12.5px;line-height:1.5;
+  opacity:0;visibility:hidden;transform:translateY(-4px);transition:opacity .12s ease,transform .12s ease,visibility .12s;
+  font-weight:400;letter-spacing:normal;text-transform:none}
+.hint-pop-left{left:0}
+.hint-pop-right{right:0}
+.info-hint-wrap:hover .hint-pop,
+.info-hint-wrap:focus-within .hint-pop{opacity:1;visibility:visible;transform:translateY(0)}
+.hint-pop strong{display:block;color:var(--accent);font-size:11px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:8px}
+.hint-pop ul{margin:0;padding-left:16px;display:flex;flex-direction:column;gap:6px}
+.hint-pop li{color:var(--muted)}
+.hint-pop b{color:var(--ink)}
+.hint-pop kbd{font-family:"JetBrains Mono",ui-monospace,monospace;font-size:11px;background:var(--bg);
+  border:1px solid var(--border);border-radius:4px;padding:0 5px;color:var(--ink)}
+
+textarea,#out{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;padding:14px;background:transparent;color:var(--ink);border:0;outline:0;resize:none;height:520px;overflow:auto;white-space:pre;tab-size:2}
+textarea:focus{box-shadow:inset 0 0 0 2px var(--focus);border-radius:0 0 12px 12px}
+#out{margin:0;cursor:text}
+
+.out-primary{color:var(--primary)}
+.out-alt{color:var(--alt)}
+.out-lyric{color:var(--lyric)}
+.out-rest{color:var(--rest)}
+.out-oor{color:var(--alert)}
+
+.legend{display:flex;flex-wrap:wrap;gap:14px;align-items:center;font-size:12.5px;color:var(--muted)}
+.legend .grp{display:inline-flex;gap:6px;align-items:center}
+.legend .chip{font-family:"JetBrains Mono",monospace;background:var(--panel-2);border:1px solid var(--border);padding:1px 7px;border-radius:4px;color:var(--ink)}
+.legend .chip.blow{color:var(--primary)} .legend .chip.draw{color:var(--primary)}
+.legend .chip.bend{color:var(--bend)}   .legend .chip.over{color:var(--over)}
+.legend .chip.oor{color:var(--alert)}
+.legend .sep{width:1px;height:18px;background:var(--border)}
+
+.foot{color:var(--muted);font-size:12.5px;line-height:1.65;margin:12px 0 0}
+.foot code{background:var(--panel-2);padding:1px 5px;border-radius:3px;font-size:12px}
+
+.file-status{font-size:12px;padding:8px 14px;border-top:1px solid var(--border)}
+.file-status.ok{color:var(--alt)} .file-status.err{color:var(--alert)}
