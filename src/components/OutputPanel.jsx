@@ -1,5 +1,6 @@
 // src/components/OutputPanel.jsx
 import { useEffect } from 'react';
+import InfoHint from './InfoHint';
 
 export default function OutputPanel({ state, patch, html, onModeChange, preRef }){
   // Imperatively sync innerHTML — bypasses React's diffing so contenteditable
@@ -30,8 +31,24 @@ export default function OutputPanel({ state, patch, html, onModeChange, preRef }
             <option value="diatonic">Diatonic</option>
             <option value="tremolo">Tremolo</option>
           </select>
+          <InfoHint align="left">
+            <strong>Output panel</strong>
+            <ul>
+              <li><b>SCALE</b> — show results as scale degrees instead of harmonica tabs.</li>
+              <li><b>LIVE / LOCKED</b> — <b>LIVE</b> re-renders as the input changes; <b>LOCKED</b> freezes the output so your manual edits survive.</li>
+              <li><b>Zoom</b> — <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>+</kbd>/<kbd>−</kbd> resize the text, <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>0</kbd> to reset. (Doesn't change page zoom.)</li>
+            </ul>
+          </InfoHint>
         </div>
-        <div style={{display:'flex', gap:6}}>
+        <div style={{display:'flex', gap:6, alignItems:'center'}}>
+          {state.zoom !== 1 && (
+            <span
+              className="zoom-badge"
+              title="Panel zoom — Ctrl+Alt+ +/- to change, Ctrl+Alt+0 to reset"
+            >
+              {Math.round(state.zoom * 100)}%
+            </span>
+          )}
           <button
             className="copy"
             aria-pressed={state.showDegrees}
@@ -54,6 +71,7 @@ export default function OutputPanel({ state, patch, html, onModeChange, preRef }
         ref={preRef}
         id="out"
         className="out-render"
+        style={{ fontSize: `${(14 * state.zoom).toFixed(2)}px` }}
         contentEditable
         suppressContentEditableWarning
         spellCheck={false}

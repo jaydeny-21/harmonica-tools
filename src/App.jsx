@@ -61,6 +61,26 @@ export default function App(){
     };
   }, [state.scrollSync]);
 
+  // Ctrl+Alt+ +/- zooms the input and output panels together, without
+  // touching the rest of the page (Ctrl+Alt+0 resets). Uses e.code so both
+  // the main row and numpad work, and leaves the browser's own Ctrl +/- alone.
+  useEffect(() => {
+    const onKey = (e) => {
+      if(!e.ctrlKey || !e.altKey) return;
+      const isPlus  = e.code === 'Equal'  || e.code === 'NumpadAdd';
+      const isMinus = e.code === 'Minus'  || e.code === 'NumpadSubtract';
+      const isReset = e.code === 'Digit0' || e.code === 'Numpad0';
+      if(!isPlus && !isMinus && !isReset) return;
+      e.preventDefault();
+      if(isReset){ patch({ zoom: 1 }); return; }
+      const step = isPlus ? 0.1 : -0.1;
+      const next = Math.min(3, Math.max(0.5, +(state.zoom + step).toFixed(2)));
+      patch({ zoom: next });
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [state.zoom, patch]);
+
   // When input mode changes and the input is pristine, swap the sample.
   const changeInMode = (v) => {
     patch({ inMode:v });

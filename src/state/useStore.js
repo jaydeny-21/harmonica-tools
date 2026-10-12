@@ -12,6 +12,7 @@ export const initialState = {
   inputDegrees: false,
   input: '',
   scrollSync: true,
+  zoom: 1,
 };
 
 function reducer(state, action){
